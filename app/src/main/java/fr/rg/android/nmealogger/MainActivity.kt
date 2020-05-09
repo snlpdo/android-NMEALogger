@@ -44,7 +44,6 @@ class MainActivity : AppCompatActivity(), LocationListener {
         setContentView(binding.root)
 
         val adapter = NmeaFrameListAdapter()
-        //val adapter = NmeaFrameAdapter(viewModel.histNmea)
         binding.nmeaList.adapter = adapter
 
         viewModel.histNmea.observe(this, Observer {
