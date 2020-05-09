@@ -6,14 +6,15 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
-import android.location.OnNmeaMessageListener
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 import fr.rg.android.nmealogger.databinding.ActivityMainBinding
 import java.io.IOException
 import java.net.DatagramPacket
@@ -43,7 +44,10 @@ class MainActivity : AppCompatActivity(), LocationListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val adapter = NmeaFrameListAdapter()
+        val adapter = NmeaFrameListAdapter(NmeaClickListener {
+            //Toast.makeText(this, "${it.content}", Toast.LENGTH_LONG).show()
+            Snackbar.make(binding.root, "${it.content}", Snackbar.LENGTH_LONG).show()
+        })
         binding.nmeaList.adapter = adapter
 
         viewModel.histNmea.observe(this, Observer {

@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="nmea"
+            type="fr.rg.android.nmealogger.NmeaFrame" />
+        <variable
+            name="clickListener"
+            type="fr.rg.android.nmealogger.NmeaClickListener" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> clickListener.onClick(nmea)}">
 
         <TextView
             android:id="@+id/frame_timestamp"
@@ -15,10 +24,11 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif-condensed-light"
-            android:text="TextView"
             android:textSize="8sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:nmeaTimestamp="@{nmea}"
+            tools:text="20/06/1975 17:45:00" />
 
         <TextView
             android:id="@+id/frame_content"
@@ -27,9 +37,10 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif-condensed-light"
-            android:text="TextView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frame_timestamp" />
+            app:layout_constraintTop_toBottomOf="@+id/frame_timestamp"
+            app:nmeaFrameContent="@{nmea}"
+            tools:text="GPGSA,A,3,02,04,15,27,,,,,,,,,1.1,0.7,0.7,3*37" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

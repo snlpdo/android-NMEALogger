@@ -18,9 +18,10 @@ class NmeaViewModel : ViewModel(), OnNmeaMessageListener {
     override fun onNmeaMessage(message: String, timestamp: Long) {
         // Compléter la liste
 //        val key = message.split(',')[0].substring(1)
-//        nmeaHashMap[key] = message
+//        nmeaHashMap[key] = NmeaFrame(timestamp, message)
+//        _histNmea.value = nmeaHashMap.values.toMutableList()
 
-        _histNmea.value!!.add(NmeaFrame(timestamp, message))
+        _histNmea.value?.add(NmeaFrame(timestamp, message))
         // les observateurs ne sont avertis que lorsque le mutateur est utilisé
         _histNmea.value = _histNmea.value
     }
